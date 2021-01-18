@@ -9,7 +9,7 @@ public class Exercises {
 	 helloName("X") → "Hello X!"
 	 */
 	public String helloName(String name) {
-		return null;
+		return ("Hello " + name +"!");
 	}
 
 	/*
@@ -20,7 +20,7 @@ public class Exercises {
 	 makeAbba("What", "Up") → "WhatUpUpWhat"
 	 */
 	public String makeAbba(String a, String b) {
-		return null;
+		return (a + b + b + a);
 	}
 
 	/*
@@ -32,7 +32,7 @@ public class Exercises {
 	 makeTags("cite", "Yay") → "<cite>Yay</cite>"
 	 */
 	public String makeTags(String tag, String word) {
-		return null;
+		return ("<"+ tag + ">" + word + "</"+ tag +">");
 	}
 
 	/*
@@ -44,7 +44,8 @@ public class Exercises {
 	 makeOutWord("[[]]", "word") → "[[word]]"
 	 */
 	public String makeOutWord(String out, String word) {
-		return null;
+
+		return (out.substring(0,2) + word + out.substring(2));
 	}
 
 	/*
@@ -55,7 +56,8 @@ public class Exercises {
 	 extraEnd("Hi") → "HiHiHi"
 	 */
 	public String extraEnd(String str) {
-		return null;
+
+		return (str.substring(str.length() -2) + str.substring(str.length() -2) + str.substring(str.length() -2));
 	}
 
 	/*
@@ -67,9 +69,12 @@ public class Exercises {
 	 firstTwo("ab") → "ab"
 	 */
 	public String firstTwo(String str) {
-		return null;
+		if (str.length() >= 2) {
+			return str.substring(0, 2);
+		} else {
+			return str;
+		}
 	}
-
 	/*
 	 Given a string of even length, return the first half. So the string "WooHoo" yields "Woo".
 	 firstHalf("WooHoo") → "Woo"
@@ -77,8 +82,9 @@ public class Exercises {
 	 firstHalf("abcdef") → "abc"
 	 */
 	public String firstHalf(String str) {
-		return null;
-	}
+			return str.substring(0, (str.length() / 2));
+		}
+
 
 	/*
 	 Given a string, return a version without the first and last char, so "Hello" yields "ell".
@@ -87,9 +93,10 @@ public class Exercises {
 	 withoutEnd("java") → "av"
 	 withoutEnd("coding") → "odin"
 	 */
-	public String withoutEnd(String str) {
-		return null;
-	}
+		public String withoutEnd (String str){
+			return str.substring(1, str.length() -1);
+		}
+
 
 	/*
 	 Given 2 strings, a and b, return a string of the form short+long+short, with the shorter string
@@ -100,7 +107,11 @@ public class Exercises {
 	 comboString("aaa", "b") → "baaab"
 	 */
 	public String comboString(String a, String b) {
-		return null;
+		if (a.length() > b.length()) {
+			return (b + a + b);
+		} else {
+			return (a + b + a);
+		}
 	}
 
 	/*
@@ -111,7 +122,7 @@ public class Exercises {
 	 nonStart("shotl", "java") → "hotlava"
 	 */
 	public String nonStart(String a, String b) {
-		return null;
+		return (a.substring(1) + b.substring(1));
 	}
 
 	/*
@@ -122,7 +133,7 @@ public class Exercises {
 	 left2("Hi") → "Hi"
 	 */
 	public String left2(String str) {
-		return null;
+		return (str.substring(2) + str.substring(0, 2));
 	}
 
 	/*
@@ -133,7 +144,7 @@ public class Exercises {
 	 right2("Hi") → "Hi"
 	 */
 	public String right2(String str) {
-		return null;
+		return (str.substring(str.length() -2) + str.substring(0, str.length() -2));
 	}
 
 	/*
@@ -176,7 +187,16 @@ public class Exercises {
 	 endsLy("oddy") → false
 	 */
 	public boolean endsLy(String str) {
-		return false;
+		int length = str.length();
+		String ly = "ly";
+
+		if (length < 2) {
+			return false;
+		} else if (ly.equals(str.substring(length -2, length)))
+			return true;
+		else {
+			return false;
+		}
 	}
 
 	/*
