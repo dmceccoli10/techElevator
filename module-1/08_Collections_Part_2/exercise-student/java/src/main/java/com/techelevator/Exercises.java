@@ -34,7 +34,20 @@ public class Exercises {
 	 *
 	 */
 	public String animalGroupName(String animalName) {
-		return null;
+		Map<String, String> groups = new HashMap<>();
+		groups.put("rhino", "Crash");
+		groups.put("giraffe", "Tower");
+		groups.put("elephant", "herd");
+		groups.put("lion", "Pride");
+		groups.put("crow", "Murder");
+		groups.put("pigeon", "Kit");
+		groups.put("flamingo", "Pat");
+		groups.put("deer", "Herd");
+		groups.put("dog", "Pack");
+		groups.put("crocodile", "Float");
+
+
+		return groups.get(animalName.toLowerCase());
 	}
 
 	/*
@@ -60,7 +73,20 @@ public class Exercises {
 	 *
 	 */
 	public double isItOnSale(String itemNumber) {
-		return -1.0;
+		Map<String, Double> onSale = new HashMap<>();
+
+		onSale.put("KITCHEN4001", 0.20);
+		onSale.put("GARAGE1070", 0.15);
+		onSale.put("LIVINGROOM", 0.10);
+		onSale.put("KITCHEN6073", 0.40);
+		onSale.put("BEDROOM3434", 0.60);
+		onSale.put("BATH0073", 0.15);
+
+		if (onSale.containsKey(itemNumber.toUpperCase())) {
+			return onSale.get(itemNumber.toUpperCase());
+		}
+
+		return 0.00;
 	}
 
 	/*
@@ -115,7 +141,18 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+		Map<String, Integer> counts = new HashMap<>();
+
+		for (String word : words) {
+			if (counts.containsKey(word)) {
+				int currentCount = counts.get(word);
+				currentCount++;
+				counts.put(word, currentCount);
+			} else {
+				counts.put(word, 1);
+			}
+		}
+		return counts;
 	}
 
 	/*
