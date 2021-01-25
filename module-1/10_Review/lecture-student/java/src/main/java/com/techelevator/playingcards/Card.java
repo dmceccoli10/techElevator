@@ -35,7 +35,7 @@ public class Card {
         return description;
     }
 
-    public int getValue() {
+    public static int getValueForRank (String rank) {
         Map<String,Integer> cardValues = new HashMap<>();
         cardValues.put("Two", 2);
         cardValues.put("Three", 3);
@@ -52,6 +52,12 @@ public class Card {
         cardValues.put("Ace", 14);
 
         return cardValues.get(rank);
+    }
+
+    public int getValue() {
+
+
+        return getValueForRank(this.rank);
     }
 
     public Card() {
