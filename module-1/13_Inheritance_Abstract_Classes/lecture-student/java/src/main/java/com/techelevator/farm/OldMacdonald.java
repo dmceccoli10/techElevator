@@ -10,7 +10,11 @@ public class OldMacdonald {
 		Cow daisy = new Cow();
 		Chicken nugget = new Chicken();
 		Alpaca peru = new Alpaca();
-		Singable[] singables = new Singable[] { daisy, nugget, peru, new Tractor() };
+		Cat longfellow = new Cat();
+		longfellow.setNickname("Longfellow");
+		Duck firstDuck = new Duck();
+		firstDuck.setNickname("Quackers");
+		Singable[] singables = new Singable[] { daisy, nugget, peru, new Tractor(), longfellow, firstDuck };
 
 		for (Singable singableThing : singables) {
 			String name = singableThing.getName();
@@ -32,6 +36,7 @@ public class OldMacdonald {
 		System.out.println("Or buy the whole farm for $" + total);
 
 
-
+		System.out.println(daisy);
+		System.out.println(longfellow);
 	}
 }

@@ -2,8 +2,7 @@ package com.techelevator.farm;
 
 import java.math.BigDecimal;
 
-public class Alpaca extends Livestock {
-
+public class Alpaca extends FarmAnimal {
     public Alpaca() {
         super("Alpaca");
     }
@@ -20,6 +19,6 @@ public class Alpaca extends Livestock {
 
     @Override
     public BigDecimal getPrice() {
-        return new BigDecimal("10000.00");
+        return new BigDecimal ("10000.00");
     }
 }
