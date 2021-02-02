@@ -6,11 +6,11 @@ public class Example5 {
 
 		/* The withdraw method can throw a checked exception (i.e. OverdraftException) so we need to catch it since
 		 * the main method does not declare that it throws any exceptions. */
-		double currentBalance = 250;
+		double currentBalance = 450;
 		double amountToWithdraw = 300;
 		try {
 			double newBalance = withdraw(currentBalance, amountToWithdraw);
-			System.out.println("new balance is "+newBalance);
+			System.out.println("New balance is "+newBalance);
 		} catch(OverdraftException e) {
 			System.out.println("Unfortunately, you can't withdraw more money than you have in the bank...");
 			System.out.println("The requested amount would overdraw the account by "+e.getOverdraftAmount());

@@ -6,7 +6,7 @@ public class Example2 {
 		
 		/* try/catch blocks will also catch Exceptions that are thrown from method calls further down the stack */
 		try {
-			System.out.println("Hey ya'll, watch this!");
+			System.out.println("Hey y'all, watch this!");
 			doSomethingDangerous();  // throws an ArrayIndexOutOfBoundsException
 			System.out.println("See, I told you nothing would go wrong!");
 		} catch(ArrayIndexOutOfBoundsException e) {  
