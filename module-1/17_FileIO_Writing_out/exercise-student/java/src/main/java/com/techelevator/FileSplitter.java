@@ -65,9 +65,7 @@ public class FileSplitter {
 			System.out.println("File was not found");
 		}
 	}
-
-
-
+	
 
 	//Split source file into number of files specified in equation
 
