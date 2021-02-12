@@ -113,4 +113,7 @@ WHERE title = 'EUCLIDEAN PI';
 -- describe any remaining adjustments needed before the film "Euclidean PI" can
 -- be removed from the film table.
 
+--You would need to delete any other occurances of film_id 1001 from other tables. For example, 
+--film_actor still references Euclidean PI's film_id.
+
 
