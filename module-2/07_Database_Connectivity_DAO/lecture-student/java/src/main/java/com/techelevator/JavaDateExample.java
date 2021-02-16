@@ -13,6 +13,7 @@ public class JavaDateExample {
 		doBirthdayCalculationsUsingJava8Classes();
 	}
 
+	//before Java 8 -- yikes
 	private static void doBirthdayCalculationsUsingLegacyDateClasses() {
 		Calendar birthdayCal = Calendar.getInstance(); // This instance now represents the instant (year, month, day, hour, etc) that it was instantiated
 		birthdayCal.set(1995, Calendar.MAY, 23, 0, 0, 0);
@@ -37,7 +38,8 @@ public class JavaDateExample {
 			System.out.println(daysUntilBirthday+" days until Java's birthday!");
 		}
 	}
-	
+
+	//From Java 8 and onwards
 	private static void doBirthdayCalculationsUsingJava8Classes() {
 		LocalDate javaBirthdate = LocalDate.of(1995, 5, 23);
 		MonthDay javaBirthday = MonthDay.from(javaBirthdate);

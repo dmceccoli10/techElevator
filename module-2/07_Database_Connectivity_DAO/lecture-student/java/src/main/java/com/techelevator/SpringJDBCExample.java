@@ -45,7 +45,7 @@ public class SpringJDBCExample {
 		String sqlCreateActor = "INSERT INTO actor(actor_id, first_name, last_name) "+
 								"VALUES (?, ?, ?)";
 		
-		dvdstoreJdbcTemplate.update(sqlCreateActor, 1000, "Craig", "Castelaz");
+		dvdstoreJdbcTemplate.update(sqlCreateActor, 5000, "Mickey", "Mouse");
 		
 		/* The next example makes use of the world database, so we need a new 
 		 * DataSource for creating connections to that database. */
