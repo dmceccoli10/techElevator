@@ -77,6 +77,10 @@ public class JdbcUserDao implements UserDao {
         }
     }
 
+    // HACKER STUFF - log in and enter this stuff under username
+    // delete the table:      '; DROP TABLE users --
+    // create a log in:       '; INSERT INTO users(username, password, salt) VALUES (t, s, ''); --
+
     /**
      * Get all of the users from the database.
      * @return a List of user objects

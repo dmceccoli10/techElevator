@@ -70,11 +70,39 @@ public class JDBCCountryLanguageDAOIntegrationTest {
         assertLanguagesAreEqual(expected,list.get(0));
     }
 
-    private void addLanguageForCountryToDatabase(String countryCode, double percent, String name, boolean isOfficial){
+    @Test
+    public void test_update_country_language() {
+        //arrange
+        CountryLanguage justAdded = addLanguageForCountryToDatabase(TEST_COUNTRY, 1, "test language", false);
+        justAdded.setPercentage(95);
+        justAdded.setOfficial(true);
+
+        //act
+        dao.updateLanguage(justAdded);
+        //assert
+        //read from the database again
+        //get all of  the country languages for our test country
+        List<CountryLanguage> results = dao.getLanguagesForCountry(TEST_COUNTRY);
+        //find the one that we updated in the list by its pk
+        CountryLanguage readFromDB = null;
+        for(CountryLanguage cl : results) {
+            if(cl.getCountryCode().equals(justAdded.getCountryCode()) && cl.getLanguage().equals(justAdded.getLanguage())) {
+                readFromDB = cl;
+                break; //leave the loop once we find it to be faster
+            }
+        }
+        //we should have found it
+        assertNotNull(readFromDB);
+        assertLanguagesAreEqual(justAdded, readFromDB);
+    }
+
+    private CountryLanguage addLanguageForCountryToDatabase(String countryCode, double percent, String name, boolean isOfficial){
         String sql = "INSERT INTO countrylanguage(countrycode,percentage,isofficial,language) VALUES(?,?,?,?)";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(sql, countryCode,percent,isOfficial,name);
+        return new CountryLanguage(countryCode, isOfficial, name, percent);
     }
+
 
     private void assertLanguagesAreEqual(CountryLanguage a, CountryLanguage b){
         assertEquals(a.getCountryCode(),b.getCountryCode());

@@ -64,7 +64,7 @@ public class JDBCCityDAOIntegrationTest {
 
 	@Test
 	public void save_new_city_and_read_it_back() throws SQLException {
-		City theCity = makeLocalCityObject("SQL Station", "South Dakota", "USA", 65535);
+		City theCity = makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535);
 
 		dao.save(theCity);
 		City savedCity = dao.findCityById(theCity.getId());
@@ -77,7 +77,7 @@ public class JDBCCityDAOIntegrationTest {
 	public void returns_cities_by_country_code() {
 		City theCity = makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535);
 
-		dao.save(theCity);
+		dao.save(theCity);//we're trying to test findCityByCountryCode, we're assuming this worked
 		List<City> results = dao.findCityByCountryCode(TEST_COUNTRY);
 
 		assertNotNull(results);
@@ -89,11 +89,14 @@ public class JDBCCityDAOIntegrationTest {
 	@Test
 	public void returns_multiple_cities_by_country_code() {
 
+		//Arrange
 		dao.save(makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535));
 		dao.save(makeLocalCityObject("Postgres Point", "North Dakota", TEST_COUNTRY, 65535));
 
+		//Act
 		List<City> results = dao.findCityByCountryCode(TEST_COUNTRY);
 
+		//Assert
 		assertNotNull(results);
 		assertEquals(2, results.size());
 	}
@@ -110,6 +113,60 @@ public class JDBCCityDAOIntegrationTest {
 		assertEquals(1, results.size());
 		City savedCity = results.get(0);
 		assertCitiesAreEqual(theCity, savedCity);
+	}
+
+	@Test
+	public void update_city_bad_test_always_passes() {
+		City theCity = makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535);
+		//add city to the database
+		dao.save(theCity);
+
+		//update the local object
+		theCity.setPopulation(1);
+		theCity.setDistrict("Disneyland");
+
+		//save to the database
+		City updatedCity = dao.update(theCity);
+
+		//Check that they are the same
+		assertCitiesAreEqual(theCity, updatedCity);
+	}
+
+	@Test
+	public void update_city_good_test() {
+		City theCity = makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535);
+		//add city to the database
+		dao.save(theCity);
+
+		//update the local object
+		theCity.setPopulation(1);
+		theCity.setDistrict("Disneyland");
+
+		//save to the database
+		City updateResult = dao.update(theCity);
+
+		//re-read the city from the database
+		City updatedCity = dao.findCityById(theCity.getId());
+
+		//Check that they are the same
+		assertCitiesAreEqual(theCity, updatedCity);
+	}
+
+	@Test
+	public void delete_city_test() {
+		City theCity = makeLocalCityObject("SQL Station", "South Dakota", TEST_COUNTRY, 65535);
+
+		//add city to the database
+		dao.save(theCity);
+
+		List<City> cities = dao.findCityByCountryCode(TEST_COUNTRY);
+
+		assertEquals(1, cities.size());
+
+		dao.delete(theCity.getId());
+		List<City> newResults = dao.findCityByCountryCode(TEST_COUNTRY);
+
+		assertEquals(0, newResults.size());
 	}
 
 	private City makeLocalCityObject(String name, String district, String countryCode, int population) {
