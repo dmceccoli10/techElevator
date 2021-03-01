@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component //anytime spring framework creates a controller or new object that needs a hotelDAO as a parameter to the constructor, create a new MemoryHotelDAO and pass that in
 public class MemoryHotelDAO implements HotelDAO {
 
     private List<Hotel> hotels = new ArrayList<>();

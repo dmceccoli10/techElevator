@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class HotelController {
 
     private HotelDAO hotelDAO;
@@ -39,6 +40,45 @@ public class HotelController {
     @RequestMapping(path = "/hotels/{id}", method = RequestMethod.GET)
     public Hotel get(@PathVariable int id) {
         return hotelDAO.get(id);
+    }
+
+    //List all reservations
+    @RequestMapping(path = "/reservations", method = RequestMethod.GET)
+    public List<Reservation> getReservations() {
+        return reservationDAO.findAll();
+    }
+
+    //Get reservation by id
+    //reservation/{id}
+    @RequestMapping(path = "/reservations/{id}", method = RequestMethod.GET)
+    public Reservation getReservationById(@PathVariable int id) {
+        return reservationDAO.get(id);
+    }
+
+    //List all reservations by hotel
+    @RequestMapping(path = "/hotels/{id}/reservations", method = RequestMethod.GET)
+    public List<Reservation> getReservationsForHotel(@PathVariable int id) {
+        return reservationDAO.findByHotel(id);
+    }
+
+    //add a new reservation
+    //path: /hotels/{id}/reservations
+    //request method: POST
+    @RequestMapping(path = "hotels/{id}/reservations",method = RequestMethod.POST)
+    public Reservation addReservation(@PathVariable int id, @RequestBody Reservation reservation) {
+        return reservationDAO.create(reservation, id);
+    }
+
+    //filter hotels
+    //path: /hotels/filter?state={state}&city={city}
+    @RequestMapping(path = "/filter", method = RequestMethod.GET)
+    public List<Hotel> filterByCityAndState(@RequestParam String state, @RequestParam(required = false) String city ) {
+        //if city is populated use that, otherwise use state
+        if(city != null) {
+            return hotelDAO.filterByCity(city);
+        } else {
+            return hotelDAO.filterByState(state);
+        }
     }
 
 }

@@ -28,8 +28,25 @@ public class HotelService {
    * @return Reservation
    */
   public Reservation addReservation(String newReservation) {
-    // TODO: Implement method
-    return null;
+
+    Reservation reservation = makeReservation(newReservation);
+    if (reservation == null) {
+      return null;
+    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<Reservation> entity = new HttpEntity<>(reservation, headers);
+    //HTTPEntity constructor takes 2 parameters - what goes in the body, and what goes in the header - in that order!
+
+    try {
+      reservation = restTemplate.postForObject(BASE_URL + "hotels/" + reservation.getHotelID() + "/reservations", entity, Reservation.class);
+    } catch (RestClientResponseException ex) {
+      console.printError(ex.getRawStatusCode()+": "+ex.getStatusText());
+    } catch (ResourceAccessException ex) {
+      console.printError(ex.getMessage());
+    }
+    return reservation;
   }
 
   /**
@@ -40,8 +57,24 @@ public class HotelService {
    * @return
    */
   public Reservation updateReservation(String CSV) {
-    // TODO: Implement method
-    return null;
+    //http://localhost:3000/reservations/423
+    Reservation reservation = makeReservation(CSV);
+    if(reservation == null) {
+      return null;
+    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Reservation> entity = new HttpEntity<>(reservation, headers);
+
+    try {
+      //difference between POST/add is that we have the reservation id in the url AND we use restTemplate.put
+      restTemplate.put(BASE_URL+"reservations/"+reservation.getId(), entity);
+    } catch (RestClientResponseException ex) {
+      console.printError(ex.getRawStatusCode()+": "+ex.getStatusText());
+    } catch (ResourceAccessException ex) {
+      console.printError(ex.getMessage());
+    }
+    return reservation;
   }
 
   /**
@@ -50,7 +83,14 @@ public class HotelService {
    * @param id
    */
   public void deleteReservation(int id) {
-    // TODO: Implement method
+    try {
+      restTemplate.delete(BASE_URL+"reservations/"+id);
+    } catch (RestClientResponseException ex) {
+      console.printError(ex.getRawStatusCode()+": "+ex.getStatusText());
+    } catch (ResourceAccessException ex) {
+      console.printError(ex.getMessage());
+    }
+
   }
 
   /* DON'T MODIFY ANY METHODS BELOW */

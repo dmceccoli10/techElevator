@@ -25,7 +25,7 @@ public class HotelService {
 
   /**
    * Create a new reservation in the hotel reservation system
-   * 
+   *
    * @param newReservation
    * @return Reservation
    */
@@ -36,8 +36,17 @@ public class HotelService {
     }
 
     // TODO: Fix Me
-    throw new HotelServiceException("NOT IMPLEMENTED");
+    throw new HotelServiceException(INVALID_RESERVATION_MSG);
   }
+
+  //send a post that includes the reservation in the body and the token in the header
+  try {
+    reservation = restTemplate.postForObject(BASE_URL+"hotels/"+reservation.getHotelID()+"/reservations",makeReservationEntity(reservation), Reservation.class);
+  } catch (RestClientResponseException ex) {
+    throw new HotelServiceException(ex.getRawStatusCode() + " : " + ex.getResponseBodyAsString());
+  }
+  return reservation;
+}
 
   /**
    * Updates an existing reservation by replacing the old one with a new

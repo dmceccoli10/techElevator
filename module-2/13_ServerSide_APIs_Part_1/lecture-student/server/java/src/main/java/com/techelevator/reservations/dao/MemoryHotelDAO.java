@@ -33,6 +33,30 @@ public class MemoryHotelDAO implements HotelDAO {
     }
 
     @Override
+    public List<Hotel> filterByState(String state) {
+        List<Hotel> filteredList = new ArrayList<>();
+        //loop through existing hotels and add to the filteredList if the state matches
+        for(Hotel hotel : hotels) {
+            if(hotel.getAddress().getState().equalsIgnoreCase(state)) {
+                filteredList.add(hotel);
+            }
+        }
+        return filteredList;
+    }
+
+    @Override
+    public List<Hotel> filterByCity(String city) {
+        List<Hotel> filteredList = new ArrayList<>();
+        //loop through existing hotels and add to the filteredList if the city matches
+        for(Hotel hotel : hotels) {
+            if(hotel.getAddress().getCity().equalsIgnoreCase(city)) {
+                filteredList.add(hotel);
+            }
+        }
+        return filteredList;
+    }
+
+    @Override
     public List<Hotel> list() {
         return hotels;
     }
