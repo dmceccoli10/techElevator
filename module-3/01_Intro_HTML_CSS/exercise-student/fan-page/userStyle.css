@@ -1,0 +1,35 @@
+body {
+    background-image: linear-gradient(slategray, gray);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+img {
+    height: 200px;
+}
+
+header {
+    text-align: center;
+    color: #1700D3;
+    text-decoration: snow;
+}
+
+header h1 {
+    font-size: 40px;
+}
+
+header h4 {
+    font-size: 30px;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+main {
+    background-image: linear-gradient(silver, slategray);
+    color: black;
+}
