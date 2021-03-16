@@ -11,7 +11,30 @@
 		iqTest("") → 0 // there are no numbers in the given set
         iqTest("2 2 4 6") → 0 // all numbers are even, therefore there is no position of an odd number
 */
-
+    function iqTest(ints){
+        if (!ints){return 0;}
+        const checkArray = ints.split(" ");
+        let countOfOdds = 0;  
+        let oddPlace;
+        let countOfEvens = 0;
+        let evenPlace;
+            for (let i=0; i < checkArray.length; i++){
+                if(checkArray[i]%2 == 0){
+                countOfEvens += 1;
+                evenPlace = i + 1;
+            } else {
+                countOfOdds += 1;
+                oddPlace = i + 1;
+            }    
+    }
+        if ( (countOfOdds == 0 && countOfEvens > 1) || (countOfOdds > 1 && countOfEvens == 0) ){
+            return 0;
+          } else if (countOfOdds > countOfEvens){
+             return evenPlace;
+         } else {
+             return oddPlace;
+         }
+    }
 /*
 2. **titleCase** Write a function that will convert a string into title case, given an optional 
     list of exceptions (minor words). The list of minor words will be given as a string with each 
@@ -28,3 +51,27 @@ argument is unused.
 		titleCase('THE WIND IN THE WILLOWS', 'The In') // should return: 'The Wind in the Willows'
         titleCase('the quick brown fox') // should return: 'The Quick Brown Fox'
 */
+
+    function titleCase (str, list){
+        str = str.toLowerCase();
+        resultArr = str.split(' ');
+
+        if (list != undefined){
+            list = list.toLowerCase();
+            exceptions = list.split(' ');
+        }
+
+        resultArr[0] = casing(resultArr[0]);
+        for (let i = 1; i < resultArr.length; i++){
+            if (!exceptions.includes(resultArr[i])){
+            resultArr[i] = casing(resultArr[i]);
+        } else {
+            resultArr[i] = resultArr[i].toLowerCase();
+        }
+    }
+        return resultArr.join(' ');
+    }
+    function casing (str){
+        str = str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+        return str;
+    }
