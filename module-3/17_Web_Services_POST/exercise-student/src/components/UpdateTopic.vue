@@ -23,8 +23,18 @@ export default {
   },
   methods: {
     updateTopic() {
-      const topic = { id: this.topicID, title: this.title };
-      // call topic service update method
+      const topic = {id: this.topicID, title: this.title};
+      topicService.updateTopic(topic)
+      .then(response => {
+        if(response.status == 200) {
+          this.$router.push('/');
+        }
+      })
+      .catch(error => {
+        if(error.response.status == 404) {
+          this.$router.push("/not-found");
+        }
+      });
     }
   },
   created() {
